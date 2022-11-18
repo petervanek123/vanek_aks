@@ -21,9 +21,6 @@ steps:
     inlineScript: 'az aks get-credentials --name k8s_vanek-aks --resource-group k8s_vanek-rg'
 
 
-- script: |
-    kubectl apply -k ./gitops/k8s/base
-  displayName: 'run kustomize'
 
 - task: Docker@2
   inputs:
@@ -31,3 +28,7 @@ steps:
     repository: 'vanekapp'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+
+- script: |
+    kubectl apply -k ./gitops/k8s/base
+  displayName: 'run kustomize'
