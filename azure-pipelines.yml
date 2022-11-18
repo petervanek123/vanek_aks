@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  name: k8s-hatchery
+    
+steps:
+- script: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  displayName: 'install az'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Unicorn MS Academy ARCH 11(ccf6dd5f-428b-4601-bec7-8a6b42520dc9)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az aks get-credentials --name k8s_vanek-aks --resource-group k8s_vanek-rg'
+
+
+- script: |
+    kubectl apply -k ./base
+  displayName: 'run kustomize'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'vanekCR'
+    repository: 'vanekapp'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
