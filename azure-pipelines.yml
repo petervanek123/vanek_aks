@@ -22,7 +22,7 @@ steps:
 
 
 - script: |
-    kubectl apply -k ./base
+    kubectl apply -k ./gitops/k8s/base
   displayName: 'run kustomize'
 
 - task: Docker@2
