@@ -11,7 +11,7 @@ replicas:
     count: 3
 
 images:
-  - name: sem doplnit imagename
+  - name: vanekapp
   - newTag: latest
 
 patches:
