@@ -1,0 +1,21 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+bases:
+  - "../base"
+
+namespace: dev
+
+replicas:
+  - name: k8s-vanek
+    count: 3
+
+images:
+  - name: sem doplnit imagename
+  - newTag: latest
+
+patches:
+  - patch: "./ingress.patch.yaml"
+    target:
+      kind: Ingress
+      name: vanekapp

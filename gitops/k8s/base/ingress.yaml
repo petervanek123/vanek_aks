@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vanekapp
+  labels:
+    name: vanekapp
+spec:
+  rules:
+  - host: k8s-vanek.my
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/platforms"
+        backend:
+          service:
+            name: vanekapp
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: "/ok"
+        backend:
+          service:
+            name: vanekapp
+            port: 
+              number: 80

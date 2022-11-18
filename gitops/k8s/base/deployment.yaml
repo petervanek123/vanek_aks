@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-vanek
+spec:
+  selector:
+    matchLabels:
+      app: vanekapp
+  template:
+    metadata:
+      labels:
+        app: vanekapp
+    spec:
+      containers:
+      - name: vanekapp
+        image: <Image>
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 3000
