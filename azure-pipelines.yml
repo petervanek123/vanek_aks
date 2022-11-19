@@ -23,12 +23,8 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'vanek-k8s'
-    repository: 'vanekcr.azurecr.io/vanekapp'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
-    tags: 'latest'
-
-
+    
 - script: |
+    az aks update -n k8s_vanek-aks -g k8s_vanek-rg --attach-acr vanekCR
     kubectl apply -k ./gitops/k8s/base
   displayName: 'run kustomize'
