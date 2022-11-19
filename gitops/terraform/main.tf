@@ -16,14 +16,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
   dns_prefix          = "${var.dns_prefix}"
- 
+  local_account_disabled = true
 
-   role_based_access_control {
-    enabled = true
-    azure_active_directory {
-      managed = true
-      admin_group_object_ids = [var.ms_academy_admin_id, var.ms_academy_developer_id]
-    }
+   azure_active_directory_role_based_access_control{    
+    managed = true
+    admin_group_object_ids = [var.ms_academy_admin_id, var.ms_academy_developer_id]
+    tenant_id = "${var.tenant_id}"
   }
 
   identity {
@@ -36,7 +34,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name       = "default"
     node_count = "${var.node_count}"
     vm_size    = "${var.vm_size}"
-    availability_zones = [ "1", "2", "3" ]
     enable_auto_scaling = var.enable_auto_scaling
 
     node_labels = {
