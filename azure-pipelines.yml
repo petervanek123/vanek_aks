@@ -24,7 +24,7 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'vanekCR'
+    containerRegistry: '8771e209-963b-4468-9c3b-ce007df0bd79'
     repository: 'vanekapp'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
