@@ -10,7 +10,9 @@ pool:
   name: k8s-hatchery
     
 steps:
-- script: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+- script: |
+    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    az login
   displayName: 'install az'
 
 - script: |
