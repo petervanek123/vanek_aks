@@ -27,6 +27,7 @@ steps:
     sudo apt-get install terraform
     terraform init
   displayName: 'Install and initialize Terraform'
+  workingDirectory: ./gitops/terraform/
 
 - script: |
     terraform apply
