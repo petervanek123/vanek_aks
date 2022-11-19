@@ -10,10 +10,10 @@ pool:
   name: k8s-hatchery
     
 steps:
-- script: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+#- script: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
   displayName: 'install az'
 
-- task: AzureCLI@2
+#- task: AzureCLI@2
   inputs:
     azureSubscription: 'Unicorn MS Academy ARCH 11(ccf6dd5f-428b-4601-bec7-8a6b42520dc9)'
     scriptType: 'bash'
@@ -24,11 +24,15 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: '8771e209-963b-4468-9c3b-ce007df0bd79'
+    containerRegistry: 'vanekCR-6050'
     repository: 'vanekapp'
-    command: 'buildAndPush'
+    command: 'build'
     Dockerfile: '**/Dockerfile'
-
-- script: |
+- task: Docker@2
+  inputs:
+    containerRegistry: 'vanekCR-6050'
+    repository: 'vanekapp'
+    command: 'push'
+#- script: |
     kubectl apply -k ./gitops/k8s/base
   displayName: 'run kustomize'
