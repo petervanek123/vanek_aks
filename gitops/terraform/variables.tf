@@ -15,7 +15,7 @@ variable "kubernetes_version" {
 }
 variable "vm_size" {
   type = string
-  default = "Standard_D2_v2"
+  default = "Standard_D2as_v4"
 }
 variable "enable_auto_scaling" {
   type = bool

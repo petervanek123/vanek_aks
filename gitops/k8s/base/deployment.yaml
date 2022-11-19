@@ -16,7 +16,7 @@ spec:
         image: vanekcr.azurecr.io/vanekapp
         resources:
           limits:            
-            memory: "1000Mi"
-            cpu: "1000m"
+            memory: "200Mi"
+            cpu: "100m"
         ports:
         - containerPort: 3000

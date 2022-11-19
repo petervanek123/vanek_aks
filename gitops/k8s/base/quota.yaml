@@ -4,8 +4,8 @@ metadata:
   name: dev-resource-quota
 spec:
   hard:
-    requests.cpu: "1"
+    requests.cpu: "100m"
     requests.memory: "128Mi"
     limits.cpu: "200m"
-    limits.memory: "300Mi"
+    limits.memory: "500Mi"
     pods: "7"
