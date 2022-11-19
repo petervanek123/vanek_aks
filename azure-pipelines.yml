@@ -25,7 +25,7 @@ steps:
     sudo tee /etc/apt/sources.list.d/hashicorp.list
     sudo apt update
     sudo apt-get install terraform
-    terraform init
+    terraform init --upgrade
   displayName: 'Install and initialize Terraform'
   workingDirectory: ./gitops/terraform/
 
