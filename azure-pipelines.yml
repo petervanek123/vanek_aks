@@ -21,10 +21,10 @@ steps:
 #    inlineScript: 'az aks get-credentials --name k8s_vanek-aks --resource-group k8s_vanek-rg'
 
 - script: |
-    docker build . -f vanekapp:latest
+    docker build . -f vanekcr.azurecr.io/vanekapp:latest
     docker push vanekcr.azurecr.io/vanekapp:latest
   displayName: 'docker build'
-  workingDirectory: app/uni-academy/uni-academy
+  workingDirectory: app/uni-academy/uni-academy/
 
 #- script: |
 #    kubectl apply -k ./gitops/k8s/base
