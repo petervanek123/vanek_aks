@@ -20,11 +20,18 @@ steps:
 #    scriptLocation: 'inlineScript'
 #    inlineScript: 'az aks get-credentials --name k8s_vanek-aks --resource-group k8s_vanek-rg'
 
-- script: |
-    docker build . -f vanekcr.azurecr.io/vanekapp:latest
-    docker push vanekcr.azurecr.io/vanekapp:latest
-  displayName: 'docker build'
-  workingDirectory: app/uni-academy/uni-academy/
+- task: Docker@2
+  inputs:
+    containerRegistry: 'vanekCR'
+    repository: 'vanekcr.azurecr.io/vanekapp'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: 'latest'
+#- script: |
+#    docker build . -f latest
+#    docker push vanekcr.azurecr.io/vanekapp:latest
+#  displayName: 'docker build'
+#  workingDirectory: app/uni-academy/uni-academy/
 
 #- script: |
 #    kubectl apply -k ./gitops/k8s/base
