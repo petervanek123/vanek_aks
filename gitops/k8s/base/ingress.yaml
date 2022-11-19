@@ -10,16 +10,10 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/platforms"
+        path: "/"
         backend:
           service:
             name: vanekapp
             port: 
               number: 80
-      - pathType: Prefix
-        path: "/ok"
-        backend:
-          service:
-            name: vanekapp
-            port: 
-              number: 80
+      

@@ -16,6 +16,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name = azurerm_resource_group.resource_group.name
   dns_prefix          = "${var.dns_prefix}"
 
+  role_based_access_control {
+    enabled = true
+  }
+
   identity {
     type = "SystemAssigned"
   }
@@ -46,7 +50,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 }
 
 resource "azurerm_role_assignment" "role_assignment" {
-  principal_id                     = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  principal_id                     = azurerm_kubernetes_cluster.aks.identity[0].principal_id
   role_definition_name             = "AcrPull"
   scope                            = azurerm_container_registry.container_registry.id
   skip_service_principal_aad_check = true

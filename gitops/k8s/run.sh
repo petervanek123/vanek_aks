@@ -6,3 +6,4 @@ kustomize build dev | kubectl apply -f -
 #kubectl apply -f .\pod1.yaml -n dev
 #kubectl apply -f .\pod2.yaml -n dev
 #kubectl apply -f .\pod3.yaml -n dev
+az aks update -n k8s_vanek-aks -g k8s_vanek-rg --attach-acr vanekCR

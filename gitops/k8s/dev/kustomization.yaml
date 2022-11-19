@@ -7,11 +7,11 @@ bases:
 namespace: dev
 
 replicas:
-  - name: k8s-vanek
+  - name: vanekapp
     count: 3
 
 images:
-  - name: vanekapp
+  - name: vanekcr.azurecr.io/vanekapp
   - newTag: latest
 
 patches:

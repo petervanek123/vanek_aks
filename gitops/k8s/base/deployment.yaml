@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-vanek
+  name: vanekapp
 spec:
   selector:
     matchLabels:
@@ -13,10 +13,10 @@ spec:
     spec:
       containers:
       - name: vanekapp
-        image: vanekapp
+        image: vanekcr.azurecr.io/vanekapp
         resources:
-          limits:
-            memory: "128Mi"
-            cpu: "100m"
+          limits:            
+            memory: "1000Mi"
+            cpu: "1000m"
         ports:
         - containerPort: 3000
