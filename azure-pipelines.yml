@@ -28,13 +28,10 @@ steps:
     sudo apt update
     sudo apt-get install terraform
     terraform init --upgrade
+    terraform apply
   displayName: 'Install and initialize Terraform'
   workingDirectory: ./gitops/terraform/
 
-- script: |
-    terraform apply
-  displayName: Terraform apply 
-  workingDirectory: ./gitops/terraform/
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Unicorn MS Academy ARCH 11(ccf6dd5f-428b-4601-bec7-8a6b42520dc9)'
