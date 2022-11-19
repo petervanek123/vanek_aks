@@ -25,6 +25,7 @@ steps:
     containerRegistry: 'vanek-k8s'
     
 - script: |
+    kubectl create ns dev
     az aks update -n k8s_vanek-aks -g k8s_vanek-rg --attach-acr vanekCR
     kubectl apply -k ./gitops/k8s/base
   displayName: 'run kustomize'
