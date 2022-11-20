@@ -40,7 +40,7 @@ stages:
           sudo apt update
           sudo apt-get install terraform
           terraform init --upgrade
-          terraform apply
+          terraform apply -var="client_secret=$(CLIENT_SECRET)" -var="tenant_id=$(TENANT_ID)" -var="client_id=$(CLIENT_ID)" -var="subscription_id=$(SUBSCRIPTION_ID)"
         workingDirectory: 'gitops/terraform/'
         
  #   - task: CmdLine@2
