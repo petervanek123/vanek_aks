@@ -21,6 +21,7 @@ stages:
         script: |
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
     - task: AzureCLI@2
+      displayName: 'Install, init, apply terraform, AKS credentials'
       inputs:
         azureSubscription: 'Unicorn MS Academy ARCH 11(ccf6dd5f-428b-4601-bec7-8a6b42520dc9)'
         scriptType: 'bash'
@@ -43,27 +44,12 @@ stages:
           terraform apply -var="client_secret=$(CLIENT_SECRET)" -var="tenant_id=$(TENANT_ID)" -var="client_id=$(CLIENT_ID)" -var="subscription_id=$(SUBSCRIPTION_ID)" -auto-approve
         workingDirectory: 'gitops/terraform/'
         
- #   - task: CmdLine@2
- #     displayName: 'Install and initialize Terraform'
- #     inputs:
- #       script: |
-#          wget -O- https://apt.releases.hashicorp.com/gpg | \
- #         gpg --dearmor | \
- #         sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-  #        gpg --no-default-keyring \
-#          --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
-#          --fingerprint
-#          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
-#          https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-#          sudo tee /etc/apt/sources.list.d/hashicorp.list
-#          sudo apt update
-#          sudo apt-get install terraform
-#          terraform init --upgrade
-#          terraform apply
-#        workingDirectory: 'gitops/terraform/'
     - task: Docker@2
       inputs:
         containerRegistry: 'vanek-k8s'
+        repository: 'vanekCR'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
     - task: CmdLine@2
       displayName: 'run kustomize'
       inputs:
