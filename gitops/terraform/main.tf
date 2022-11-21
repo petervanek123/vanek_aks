@@ -16,13 +16,14 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
   dns_prefix          = "${var.dns_prefix}"
-  local_account_disabled = true
+  #local_account_disabled = true
 
-   azure_active_directory_role_based_access_control{    
-    managed = true
-    admin_group_object_ids = [var.ms_academy_admin_id, var.ms_academy_developer_id]
-    tenant_id = "${var.tenant_id}"
-  }
+   #azure_active_directory_role_based_access_control{    
+    #managed = true
+    #admin_group_object_ids = [var.ms_academy_admin_id, var.ms_academy_developer_id]
+    #tenant_id = "${var.tenant_id}"
+
+  #}
 
   identity {
     type = "SystemAssigned"
