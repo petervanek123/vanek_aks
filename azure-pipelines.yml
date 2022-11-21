@@ -43,6 +43,10 @@ stages:
           
           az aks get-credentials --name k8s_vanek-aks --resource-group k8s_vanek-rg --admin
           az aks update -n k8s_vanek-aks -g k8s_vanek-rg --attach-acr "/subscriptions/ccf6dd5f-428b-4601-bec7-8a6b42520dc9/resourceGroups/k8s_vanek-rg/providers/Microsoft.ContainerRegistry/registries/vanekCR"
+          
+          CLIENT_ID=$(az aks show --resource-group k8s_vanek-rg --name k8s_vanek-aks --subscription $(SUBSCRIPTION_ID) --query "servicePrincipalProfile.clientId" --output tsv)
+          ACR_ID=$(az acr show --name vanekCR --resource-group k8s_vanek-rg --subscription $(SUBSCRIPTION_ID) --query "id" --output tsv)
+          az role assignment create --assignee $CLIENT_ID --role Reader --scope $ACR_ID
         workingDirectory: 'gitops/terraform/'
         
     - task: Docker@2
@@ -60,6 +64,5 @@ stages:
       inputs:
         script: |
           kubectl create ns dev
-          kubectl create secret docker-registry --name vanekapp --namespace dev --docker-server=vanekcr.azurecr.io --docker-username=$(CLIENT_ID) from previous step> --docker-password=$(CLIENT_SECRET)
           kubectl apply -k ./gitops/k8s/base
 
