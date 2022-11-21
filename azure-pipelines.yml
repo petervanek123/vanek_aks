@@ -43,7 +43,7 @@ stages:
           
           az aks get-credentials --name k8s_vanek-aks --resource-group k8s_vanek-rg --admin
           az aks update -n k8s_vanek-aks -g k8s_vanek-rg --attach-acr vanekCR
-          workingDirectory: 'gitops/terraform/'
+        workingDirectory: 'gitops/terraform/'
         
     - task: Docker@2
       displayName: 'docker build and push'
