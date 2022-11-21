@@ -52,6 +52,9 @@ stages:
         repository: 'vanekCR'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+        tags: 'latest'
+
+    
     - task: CmdLine@2
       displayName: 'run kustomize'
       inputs:
