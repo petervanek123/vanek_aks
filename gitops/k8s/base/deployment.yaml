@@ -11,6 +11,8 @@ spec:
       labels:
         app: vanekapp
     spec:
+      imagePullSecrets:
+        - name: vanekapp
       containers:
       - name: vanekapp
         image: vanekcr.azurecr.io/vanekapp
