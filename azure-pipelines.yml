@@ -60,6 +60,6 @@ stages:
       inputs:
         script: |
           kubectl create ns dev
-          kubectl create secret docker-registry vanekapp --namespace dev --docker-server=vanekcr.azurecr.io --docker-username=$(CLIENT_ID) from previous step> --docker-password=$(CLIENT_SECRET)
+          kubectl create secret docker-registry --name vanekapp --namespace dev --docker-server=vanekcr.azurecr.io --docker-username=$(CLIENT_ID) from previous step> --docker-password=$(CLIENT_SECRET)
           kubectl apply -k ./gitops/k8s/base
 
