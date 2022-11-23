@@ -12,7 +12,7 @@ trigger:
 pool:
   name: k8s-hatchery
 stages:
-- stage: create environment
+- stage: create_environment
   jobs:
   - job: Job
     pool:
