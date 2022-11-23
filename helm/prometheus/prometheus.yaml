@@ -766,9 +766,7 @@ grafana:
     ##
     # hosts:
     #   - grafana.domain.com
-    hosts: [
-    k8s-vanek.my
-    ]
+    hosts: [grafana.k8s-vanek.my]
 
     ## Path for grafana ingress
     path: /
