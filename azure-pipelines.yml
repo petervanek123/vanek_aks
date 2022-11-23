@@ -43,13 +43,20 @@ stages:
           sudo apt update
           sudo apt-get install terraform
           terraform init --upgrade   
+        workingDirectory: 'gitops/terraform/'
 
+    - task: CmdLine@2
+      displayName: 'run kustomize'
+      inputs:
+        script: |
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
           helm repo add kong https://charts.konghq.com
           helm repo update
           helm install kong/kong --generate-name --set ingressController.installCRDs=false
-          helm install prometheus prometheus-community/kube-prometheus-stack -f helm/prometheus/prometheus.yaml -n dev
-        workingDirectory: 'gitops/terraform/'
+          helm install prometheus prometheus-community/kube-prometheus-stack -f prometheus.yaml -n dev
+        workingDirectory: 'helm/prometheus/'
+      
+
 
 - stage: build
   jobs:
