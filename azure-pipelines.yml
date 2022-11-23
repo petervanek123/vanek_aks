@@ -45,16 +45,7 @@ stages:
           terraform init --upgrade   
         workingDirectory: 'gitops/terraform/'
 
-    - task: CmdLine@2
-      displayName: 'run kustomize'
-      inputs:
-        script: |
-          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-          helm repo add kong https://charts.konghq.com
-          helm repo update
-          helm install kong/kong --generate-name --set ingressController.installCRDs=false
-          helm install prometheus prometheus-community/kube-prometheus-stack -f prometheus.yaml -n dev
-        workingDirectory: 'helm/prometheus/'
+    
       
 
 
@@ -92,5 +83,20 @@ stages:
         script: |
           kubectl create ns dev
           kubectl apply -k ./gitops/k8s/base
-          
 
+- stage: Helm
+  jobs:
+  - job: Job
+    pool:
+      name: k8s-hatchery
+    steps:           
+    - task: CmdLine@2
+      displayName: 'helm install'
+      inputs:
+        script: |
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add kong https://charts.konghq.com
+          helm repo update
+          helm install kong/kong --generate-name --set ingressController.installCRDs=false
+          helm install prometheus prometheus-community/kube-prometheus-stack -f prometheus.yaml -n dev
+        workingDirectory: 'helm/prometheus/'
