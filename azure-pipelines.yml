@@ -15,10 +15,10 @@ stages:
     pool:
       name: k8s-hatchery
     steps:
-    - task: CmdLine@2
-      inputs:
-        script: |
-          sed -i 's/<terraform-sp-password>/$(CLIENT_SECRET)/g' gitops/k8s/base/secret.yaml
+  #  - task: CmdLine@2
+   #   inputs:
+   #     script: |
+   #       sed -i 's/<terraform-sp-password>/$(CLIENT_SECRET)/g' gitops/k8s/base/secret.yaml
 
     - task: CmdLine@2
       displayName: 'install az'
