@@ -45,16 +45,19 @@ variable "tenant_id" {
 }
 variable "client_id" {
   type    = string
+  default = "39a3b01c-a3ef-495b-a5ad-b1d0ee62025e"
 }
 variable "client_secret" {
   type    = string
+  default = "39a3b01c-a3ef-495b-a5ad-b1d0ee62025e"
 }
 variable "subscription_id" {
   type    = string
+  default = "39a3b01c-a3ef-495b-a5ad-b1d0ee62025e"
 }
 variable "ms_academy_admin_id" {
   type    = string
-  default = "eac5a5f9-a7ae-40bc-ad05-5415830d2bcc"
+  default = "cea27af9-f20f-4b6f-b7c1-62e1995bc708"
 }
 variable "ms_academy_developer_id" {
   type    = string
