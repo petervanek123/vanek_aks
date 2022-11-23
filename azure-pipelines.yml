@@ -71,8 +71,8 @@ stages:
     - task: Docker@2
       displayName: 'docker build and push'
       inputs:
-        containerRegistry: 'az-vanek-sc1'
-        repository: 'vanekcr.azurecr.io/vanekapp'
+        containerRegistry: 'az-vanek'
+        repository: 'vanekapp'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: 'latest'
